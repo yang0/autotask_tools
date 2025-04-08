@@ -1,4 +1,4 @@
-from .browser_use import *
+from .bu import *
 
 
 VERSION = "0.0.1"
