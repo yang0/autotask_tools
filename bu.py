@@ -22,8 +22,8 @@ BASE_URL = get_api_key(provider="browser_use", key_name="BASE_URL")
 
 
 @register_node
-class BrowserUserNode(Node):
-    NAME = "Browser User"
+class BrowserUseNode(Node):
+    NAME = "Browser Use"
     DESCRIPTION = "Execute browser automation tasks using LLM agent"
 
     # 添加类变量
