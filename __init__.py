@@ -1,4 +1,9 @@
 from .bu import *
+from .baidu import *
+from .googlesearch import *
+from .autogui import *
+from .bing import *
+
 
 
 VERSION = "0.0.1"

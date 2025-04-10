@@ -1,1 +1,6 @@
 browser_use
+pyautogui
+pyperclip
+baidusearch
+pycountry
+googlesearch
