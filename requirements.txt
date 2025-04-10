@@ -3,4 +3,4 @@ pyautogui
 pyperclip
 baidusearch
 pycountry
-googlesearch
+googlesearch-python
