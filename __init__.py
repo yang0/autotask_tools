@@ -6,7 +6,7 @@ from .bing import *
 
 
 
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 GIT_URL = "https://github.com/yang0/autotask_tools.git"
 NAME = "AutoTask Tools"
 DESCRIPTION = """

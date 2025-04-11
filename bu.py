@@ -146,7 +146,7 @@ class BrowserUseNode(Node):
             context = BrowserContext(browser=Browser(), config=config)
 
             # 创建并运行代理
-            BrowserUserNode._agent = Agent(
+            BrowserUseNode._agent = Agent(
                 task=task,
                 llm=llm,
                 use_vision=use_vision,
@@ -154,7 +154,7 @@ class BrowserUseNode(Node):
             )
 
             # 执行任务
-            response = await BrowserUserNode._agent.run()
+            response = await BrowserUseNode._agent.run()
 
             workflow_logger.info("Browser task completed successfully")
             
@@ -182,8 +182,8 @@ class BrowserUseNode(Node):
     async def stop(self) -> None:
         """Stop the browser agent when interrupted"""
         try:
-            if BrowserUserNode._agent:
-                BrowserUserNode._agent.stop()
+            if BrowserUseNode._agent:
+                BrowserUseNode._agent.stop()
         except Exception as e:
             traceback.print_exc()
 
@@ -195,6 +195,6 @@ class BrowserUseNode(Node):
                 os.unlink(self._temp_cookie_file)
                 self._temp_cookie_file = None
             # 在这里添加任何需要的清理代码
-            BrowserUserNode._agent = None
+            BrowserUseNode._agent = None
         except Exception as e:
             traceback.print_exc()
