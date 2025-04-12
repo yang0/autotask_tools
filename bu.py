@@ -20,7 +20,7 @@ API_KEY = get_api_key(provider="browser_use", key_name="API_KEY")
 MODEL = get_api_key(provider="browser_use", key_name="MODEL")
 BASE_URL = get_api_key(provider="browser_use", key_name="BASE_URL")
 
-
+  
 @register_node
 class BrowserUseNode(Node):
     NAME = "Browser Use"

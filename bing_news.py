@@ -3,7 +3,7 @@ try:
     from autotask.nodes import Node, register_node
     from autotask.api_keys import get_api_key
 except:
-    from ..stub import Node, register_node, get_api_key
+    from .stub import Node, register_node, get_api_key
 import requests
 
 

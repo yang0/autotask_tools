@@ -4,3 +4,4 @@ pyperclip
 baidusearch
 pycountry
 googlesearch-python
+azure-cognitiveservices-speech

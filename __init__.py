@@ -2,7 +2,8 @@ from .bu import *
 from .baidu import *
 from .googlesearch import *
 from .autogui import *
-from .bing import *
+from .bing_news import *
+from .speech.azure_speech import *
 
 
 
