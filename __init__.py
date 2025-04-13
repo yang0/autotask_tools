@@ -12,7 +12,7 @@ from .file.readTextFile import *
 
 
 
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 GIT_URL = "https://github.com/yang0/autotask_tools.git"
 NAME = "AutoTask Tools"
 DESCRIPTION = """

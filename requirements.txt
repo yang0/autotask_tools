@@ -1,6 +1,7 @@
 browser_use
 pyautogui
 pyperclip
+opencv-python
 baidusearch
 pycountry
 googlesearch-python

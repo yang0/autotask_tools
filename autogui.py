@@ -96,13 +96,6 @@ class MouseClickNode(BaseRPANode):
         start_time = time.time()
         try:
             # 检查上一步是否成功
-            previous_result = node_inputs.get("previous_result", {})
-            if previous_result and not previous_result.get("success", True):
-                return {
-                    "success": False,
-                    "error_message": "上一步执行失败，跳过当前节点",
-                    "execution_time": time.time() - start_time,
-                }
 
             x = node_inputs["x"]
             y = node_inputs["y"]
@@ -121,6 +114,7 @@ class MouseClickNode(BaseRPANode):
                 "click_position": {"x": x, "y": y},
             }
         except Exception as e:
+            traceback.print_exc()
             error_msg = f"鼠标点击失败: {str(e)}"
             log.error(error_msg)
             return {
@@ -162,15 +156,6 @@ class ImageClickNode(BaseRPANode):
         start_time = time.time()
         try:
             print(node_inputs)
-            # 检查上一步是否成功
-            previous_result = node_inputs.get("previous_result", {})
-            if previous_result and not previous_result.get("success", True):
-                log.debug("上一步执行失败，跳过当前节点")
-                return {
-                    "success": False,
-                    "error_message": "上一步执行失败，跳过当前节点",
-                    "execution_time": time.time() - start_time,
-                }
 
             # 添加图像文件验证
             image_path = node_inputs["target_img"]
@@ -276,13 +261,6 @@ class OpenApplicationNode(BaseRPANode):
         try:
             workflow_logger.info(f"开始执行打开应用程序: {node_inputs}")
             # 检查上一步是否成功
-            previous_result = node_inputs.get("previous_result", {})
-            if previous_result and not previous_result.get("success", True):
-                return {
-                    "success": False,
-                    "error_message": "上一步执行失败，跳过当前节点",
-                    "execution_time": time.time() - start_time,
-                }
 
             app_path = node_inputs["app_file"]
             wait_time = node_inputs.get("wait_time", 3)
@@ -338,13 +316,7 @@ class TypeTextNode(BaseRPANode):
         start_time = time.time()
         try:
             # 检查上一步是否成功
-            previous_result = node_inputs.get("previous_result", {})
-            if previous_result and not previous_result.get("success", True):
-                return {
-                    "success": False,
-                    "error_message": "上一步执行失败，跳过当前节点",
-                    "execution_time": time.time() - start_time,
-                }
+
 
             # 保存原有剪贴板内容
             original_clipboard = pyperclip.paste()
@@ -372,6 +344,7 @@ class TypeTextNode(BaseRPANode):
             }
 
         except Exception as e:
+            traceback.print_exc()
             error_msg = f"文本输入失败: {str(e)}"
             log.error(error_msg)
             return {
@@ -419,13 +392,6 @@ class KeyPressNode(BaseRPANode):
         start_time = time.time()
         try:
             # 检查上一步是否成功
-            previous_result = node_inputs.get("previous_result", {})
-            if previous_result and not previous_result.get("success", True):
-                return {
-                    "success": False,
-                    "error_message": "上一步执行失败，跳过当前节点",
-                    "execution_time": time.time() - start_time,
-                }
 
             key = node_inputs["key"]
             modifiers_str = node_inputs.get("modifiers", "").strip()
