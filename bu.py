@@ -143,7 +143,8 @@ class BrowserUseNode(Node):
                         cookies_file=processed_cookie_file,
                     )
                     
-            context = BrowserContext(browser=Browser(), config=config)
+            browser = Browser()
+            context = BrowserContext(browser=browser, config=config)
 
             # 创建并运行代理
             BrowserUseNode._agent = Agent(
@@ -158,6 +159,8 @@ class BrowserUseNode(Node):
 
             workflow_logger.info("Browser task completed successfully")
             
+            await browser.close()
+            
             return {
                 "success": True,
                 "result": response.final_result()
@@ -171,6 +174,11 @@ class BrowserUseNode(Node):
                 "result": error_msg
             }
         finally:
+            if BrowserUseNode._agent:
+                if BrowserUseNode._agent.browser:
+                    await BrowserUseNode._agent.browser.close()
+                BrowserUseNode._agent.stop()
+                BrowserUseNode._agent = None
             # Cleanup temporary cookie file if it exists
             if self._temp_cookie_file and os.path.exists(self._temp_cookie_file):
                 try:
@@ -183,6 +191,8 @@ class BrowserUseNode(Node):
         """Stop the browser agent when interrupted"""
         try:
             if BrowserUseNode._agent:
+                if BrowserUseNode._agent.browser:
+                    await BrowserUseNode._agent.browser.close()
                 BrowserUseNode._agent.stop()
         except Exception as e:
             traceback.print_exc()
@@ -195,6 +205,9 @@ class BrowserUseNode(Node):
                 os.unlink(self._temp_cookie_file)
                 self._temp_cookie_file = None
             # 在这里添加任何需要的清理代码
-            BrowserUseNode._agent = None
+            
+            if BrowserUseNode._agent:
+                BrowserUseNode._agent.stop()
+                BrowserUseNode._agent = None
         except Exception as e:
             traceback.print_exc()

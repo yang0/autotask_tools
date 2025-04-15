@@ -246,6 +246,7 @@ class OpenApplicationNode(BaseRPANode):
             "description": "要启动的应用程序完整路径",
             "type": "STRING",
             "required": True,
+            "widget": "FILE"
         },
         "wait_time": {
             "label": "等待时间",

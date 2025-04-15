@@ -6,7 +6,7 @@ from .bing_news import *
 from .speech.azure_speech import *
 
 
-VERSION = "0.0.6"
+VERSION = "0.0.7"
 GIT_URL = "https://github.com/yang0/autotask_tools.git"
 NAME = "AutoTask Tools"
 DESCRIPTION = """
