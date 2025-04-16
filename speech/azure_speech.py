@@ -72,6 +72,7 @@ class AzureSpeechNode(Node):
             "description": "Directory where the audio file will be saved",
             "type": "STRING",
             "required": True,
+            "widget": "DIR"
         }
     }
 
@@ -87,6 +88,16 @@ class AzureSpeechNode(Node):
         try:
             # Extract inputs
             text = node_inputs["text"]
+            
+            # Skip if text is empty
+            if not text or text.strip() == "":
+                workflow_logger.info("Empty text input received, skipping text-to-speech conversion")
+                return {
+                    "success": True,
+                    "audio_path": "",
+                    "message": "Skipped - empty input text"
+                }
+                
             voice = node_inputs.get("voice", "晓涵")
             style = node_inputs.get("style", "default")
             rate = node_inputs.get("rate", 1.0)
@@ -136,7 +147,12 @@ def text_to_speech(text: str, output_dir: str, voice: str = "晓涵", style: str
     """
     Convenience function to convert text to speech
     Returns the path to the generated audio file
+    If input text is empty, returns an empty string
     """
+    # Skip if text is empty
+    if not text or text.strip() == "":
+        return ""
+        
     # 生成带时间戳的文件名
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_filename = f"speech_{timestamp}.wav"
